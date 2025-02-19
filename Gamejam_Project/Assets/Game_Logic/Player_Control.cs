@@ -19,7 +19,7 @@ public class Player_Control : MonoBehaviour
     {
         //Get player input
         movement.x = Input.GetAxisRaw("Horizontal"); //For A and D
-        //movement.y = Input.GetAxisRaw("Vertical"); //For W and S (implement maybe for when used with ladders)
+        movement.y = Input.GetAxisRaw("Vertical"); //For W and S (implement maybe for when used with ladders)
     }
 
     private void FixedUpdate()
