@@ -7,9 +7,14 @@ public class Player_Control : MonoBehaviour
     public float sprintSpeed = 8f;
     public float moveSpeed = 5f;
     public float jumpForce = 14f;
+    public float climbSpeed = 4f;
+
     public Transform groundCheck;
     public LayerMask groundLayer;
+    public LayerMask ladderLayer;
+    
     private bool isGrounded;
+    private bool isOnLadder;
 
     private Rigidbody2D rb;
     private Vector2 movement;
@@ -25,13 +30,22 @@ public class Player_Control : MonoBehaviour
     {
         //Get player input
         movement.x = Input.GetAxisRaw("Horizontal"); //For A and D
-        //movement.y = Input.GetAxisRaw("Vertical"); //For W and S (implement maybe for when used with ladders)
+        movement.y = Input.GetAxisRaw("Vertical"); //For W and S 
 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
 
         if(Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            if(isGrounded)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            }
+            else if (isOnLadder)
+            {
+                isOnLadder = false;
+                rb.gravityScale = 12f;
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            }
         }
     }
 
@@ -44,7 +58,33 @@ public class Player_Control : MonoBehaviour
             currentSpeed = sprintSpeed;
         }
 
-        //Translate input to player movement
-        rb.velocity = new Vector2(movement.x * currentSpeed, rb.velocity.y);
+        if (isOnLadder)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, movement.y * climbSpeed);
+        }
+        else
+        {
+            //Translate input to player movement
+            rb.velocity = new Vector2(movement.x * currentSpeed, rb.velocity.y);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Ladder"))
+        {
+            isOnLadder = true;
+            rb.gravityScale = 0f;
+            rb.velocity = new Vector2(rb.velocity.x, 0f);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Ladder"))
+        {
+            isOnLadder = false;
+            rb.gravityScale = 12f;
+        }
     }
 }
