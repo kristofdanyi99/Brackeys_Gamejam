@@ -11,13 +11,42 @@ public class Background_Movement : MonoBehaviour
     private Vector2 currentDirection;
     private float timer;
 
-    public float minX = -13f;
-    public float maxX = 13f;
-    public float minY = -15f;
-    public float maxY = 15f;
+    private Camera mainCamera;
+    private Vector2 backgroundSize;
+    private Vector2 cameraSize;
+
+    private float minX;
+    private float maxX;
+    private float minY;
+    private float maxY;
 
     private void Start()
     {
+        mainCamera = Camera.main;
+        if (mainCamera == null)
+        {
+            Debug.LogError("Main camera not found");
+            return;
+        }
+
+        SpriteRenderer backgroundRenderer = GetComponent<SpriteRenderer>();
+        if (backgroundRenderer != null)
+        {
+            backgroundSize = backgroundRenderer.bounds.size;
+        }
+        else
+        {
+            Debug.LogError("Background does not have a SpriteRenderer component");
+            return;
+        }
+
+        cameraSize = new Vector2(
+            mainCamera.orthographicSize * 2 * mainCamera.aspect, // Width
+            mainCamera.orthographicSize * 2 // Height
+        );
+
+        CalculateCameraBounds();
+
         ChangeDirection();
         timer = moveInterval;
     }
@@ -38,20 +67,35 @@ public class Background_Movement : MonoBehaviour
 
     void ChangeDirection()
     {
-        int directionChoice = Random.Range(0, 2);
-        if (directionChoice == 0)
+        // Determine the current movement axis (horizontal or vertical)
+        bool isMovingHorizontally = Mathf.Abs(currentDirection.x) > Mathf.Abs(currentDirection.y);
+
+        if (isMovingHorizontally)
         {
-            currentDirection = Vector2.down;
+            // If currently moving horizontally, switch to vertical (up or down)
+            int verticalChoice = Random.Range(0, 2);
+            currentDirection = (verticalChoice == 0) ? Vector2.up : Vector2.down;
         }
         else
         {
-            currentDirection = Vector2.left; 
+            // If currently moving vertically, switch to horizontal (left or right)
+            int horizontalChoice = Random.Range(0, 2);
+            currentDirection = (horizontalChoice == 0) ? Vector2.left : Vector2.right;
         }
+    }
+
+    void CalculateCameraBounds()
+    {
+        minX = -backgroundSize.x / 2 + cameraSize.x / 2;
+        maxX = backgroundSize.x / 2 - cameraSize.x / 2;
+        minY = -backgroundSize.y / 2 + cameraSize.y / 2;
+        maxY = backgroundSize.y / 2 - cameraSize.y / 2;
     }
 
     void ClampPosition()
     {
         Vector2 position = transform.position;
+
         position.x = Mathf.Clamp(position.x, minX, maxX);
         position.y = Mathf.Clamp(position.y, minY, maxY);
         transform.position = position;

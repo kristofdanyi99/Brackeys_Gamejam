@@ -300,7 +300,7 @@ Transform:
   m_GameObject: {fileID: 424260012}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.81, y: 15.51, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -321,10 +321,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 0.5
   moveInterval: 5
-  minX: -13
-  maxX: 13
-  minY: -15
-  maxY: 15
 --- !u!1 &823725065
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,15 +602,10 @@ MonoBehaviour:
   sprintSpeed: 8
   moveSpeed: 5
   jumpForce: 16
-  climbSpeed: 4
-  ladderSpeed: 2
   groundCheck: {fileID: 823725066}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  ladderLayer:
-    serializedVersion: 2
-    m_Bits: 128
 --- !u!61 &1247477794
 BoxCollider2D:
   m_ObjectHideFlags: 0
