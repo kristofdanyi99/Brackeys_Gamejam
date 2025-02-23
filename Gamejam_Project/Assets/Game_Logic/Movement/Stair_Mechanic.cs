@@ -82,7 +82,7 @@ public class Stair_Mechanic : MonoBehaviour
 
         foreach (GameObject obj in objects)
         {
-            BoxCollider2D collider = obj.GetComponent<BoxCollider2D>(); // Get BoxCollider2D
+            PolygonCollider2D collider = obj.GetComponent<PolygonCollider2D>(); // Get BoxCollider2D
             if (collider != null)
             {
                 collider.enabled = false; // Disable the collider
@@ -96,7 +96,7 @@ public class Stair_Mechanic : MonoBehaviour
 
         foreach (GameObject obj in objects)
         {
-            BoxCollider2D collider = obj.GetComponent<BoxCollider2D>(); // Get BoxCollider2D
+            PolygonCollider2D collider = obj.GetComponent<PolygonCollider2D>(); // Get BoxCollider2D
             if (collider != null)
             {
                 collider.enabled = true; 
