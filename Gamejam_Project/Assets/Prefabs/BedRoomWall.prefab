@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6781598960196314849}
   - component: {fileID: 4609557179846723496}
   m_Layer: 0
-  m_Name: WallHouse5
+  m_Name: BedRoomWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 912275471
-  m_SortingLayer: -1
+  m_SortingLayer: -4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 06150b4a6822d3a4493cd35a21787eac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
