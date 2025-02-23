@@ -7,6 +7,6 @@ public class StartButtonScript : MonoBehaviour
 {
     public void OnStartButtonClicked()
     {
-        SceneManager.LoadScene("Test");
+        SceneManager.LoadScene("Level");
     }
 }

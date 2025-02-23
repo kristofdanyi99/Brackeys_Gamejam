@@ -55,6 +55,9 @@ TagManager:
   - name: Panel
     uniqueID: 1254841929
     locked: 0
+  - name: Pickup
+    uniqueID: 2094623451
+    locked: 0
   - name: Ground
     uniqueID: 3313282837
     locked: 0
