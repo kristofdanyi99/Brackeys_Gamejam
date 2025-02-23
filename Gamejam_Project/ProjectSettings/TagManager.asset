@@ -49,6 +49,9 @@ TagManager:
   - name: Furniture
     uniqueID: 2982725443
     locked: 0
+  - name: Panel
+    uniqueID: 1254841929
+    locked: 0
   - name: Ground
     uniqueID: 3313282837
     locked: 0
