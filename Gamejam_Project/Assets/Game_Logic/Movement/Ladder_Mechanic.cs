@@ -74,7 +74,7 @@ public class Ladder_Mechanic : MonoBehaviour
     {
         isOnLadder = false;
         isClimbing = false;
-        rb.gravityScale = 8f; // Restore gravity
+        rb.gravityScale = 1f; // Restore gravity
     }
 
     private void OnTriggerEnter2D(Collider2D other)

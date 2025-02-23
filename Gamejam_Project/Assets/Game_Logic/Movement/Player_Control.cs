@@ -10,6 +10,8 @@ public class Player_Control : MonoBehaviour
 
     public Transform groundCheck;
     public LayerMask groundLayer;
+    public LayerMask upstairsLayer;
+    public LayerMask downstairsLayer;
     
     private bool isGrounded;
 
@@ -27,7 +29,7 @@ public class Player_Control : MonoBehaviour
     {
         movement.x = Input.GetAxisRaw("Horizontal");
 
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer) || Physics2D.OverlapCircle(groundCheck.position, 0.2f, upstairsLayer) || Physics2D.OverlapCircle(groundCheck.position, 0.2f, downstairsLayer);
         float currentSpeed = Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : moveSpeed;
 
         rb.velocity = new Vector2(movement.x * currentSpeed, rb.velocity.y);
